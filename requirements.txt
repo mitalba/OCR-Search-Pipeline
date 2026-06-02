@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+chromadb
+pydantic
+pdfplumber
+pytesseract
+pdf2image
+Pillow
