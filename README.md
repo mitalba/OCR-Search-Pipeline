@@ -1,4 +1,4 @@
-# OCR + RAG Document Search System (FastAPI + ChromaDB)
+# OCR Document Search System (FastAPI + ChromaDB)
 
 This project allows you to:
 - Upload PDF/Image documents
@@ -9,6 +9,7 @@ This project allows you to:
 ---
 
 # ⚙️ Requirements
+- pip install -r requirements.txt
 
 ### Install Python 3.10+
 
@@ -26,3 +27,48 @@ sudo apt install tesseract-ocr
 ```
 #### MAC:
 brew install tesseract
+
+#### Run Server
+- uvicorn app.main:app --reload --port 8085
+
+#### Open API Docs
+- http://127.0.0.1:8085/docs
+
+#### 📡 API Endpoints
+📤 Upload Document
+POST /upload
+
+Upload PDF or image file.
+
+Response:
+{
+  "filename": "invoice.pdf",
+  "text_length": 1200,
+  "chunks": 5
+}
+🔍 Search Documents
+GET /search?keyword=invoice
+Response:
+{
+  "keyword": "invoice",
+  "results": [
+    "Invoice Number: 12345",
+    "Total Amount: $500"
+  ]
+}
+❓ Query Document (RAG-style)
+POST /query
+{
+  "question": "What is invoice number?"
+}
+Response:
+{
+  "question": "What is invoice number?",
+  "answer": "12345"
+}
+
+OR fallback:
+
+{
+  "relevant_chunks": ["...text..."]
+}
